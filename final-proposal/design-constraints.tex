@@ -1,0 +1,26 @@
+\section{Design Constraints}
+\subsection{Technical}
+
+Taking into account market demands, history of the topic, and potential applications, there are various technical constraints on our system:
+
+\textit{Resilient to threats:} Similar to managing a dynamic topology, the system should also be resilient to handling abrupt changes to the system to ensure that the task is distributed. The final design aims to recover from the loss of a leader within 1000\si{\ms}.
+
+\textit{Scalability:} The system should be able to reasonably perform with various densities of nodes. Working with a large number of nodes should not significantly increase latency. The final design aims to support at least 500 nodes in an area covering 1000\si{m^2}.
+
+\textit{Low power consumption:} Since this system is centered around embedded devices deployed in the real-world, the implementation should not be mindful of limitations in access to power. The final design is aimed to be consuming below 100\si{mAh} on average use.
+
+\textit{Small footprint:} The compiled code for the system should be small enough to fit into the memory of an embedded system. The final design is aimed to fit into an embedded 2\si{MB} flash memory.
+
+\subsection{Non-Technical}
+
+We also consider the non-technical constraints:
+
+\textit{Modular design:} Although the implementation in this project is for an 802.11 based chip, the system should be designed so that it may be ported to another underlying protocol.
+
+\textit{Decision making:} The system should be capable of coordinating all of the nodes to successfully arrive at decisions, ensuring that the consensus algorithm is meaningfully implemented.
+
+\textit{Dynamic topology:} Ideally, such a system is capable of performing on mobile technologies, with nodes constantly entering and exiting the network, potentially at high speeds.
+
+\textit{Versatility:} Given that consensus algorithms and mesh topology are not limited concepts, we want the system to maintain this quality and ideally be able to operate on various technologies such as UAVs, cars, rovers, etc.
+
+\textit{Open-source:} We want to provide this project with the potential to have a community develop around it for future development, implying a permissible license, proper documentation, and ease of access. The system should not be limited to expensive and obscure technology. Further, the system should be easily maintained when a certain part requires an update or a patch.
