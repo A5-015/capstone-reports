@@ -1,0 +1,81 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ESP-MESH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Our final design involves stacking together ESP-MESH and the Raft Consensus Algorithm. Hence, we first provide an overview of the ESP-MESH protocol.
+
+% ESP-MESH is a networking protocol provided by Espressif that provides native support for mesh networking atop the Wi-Fi protocol. In ESP-MESH, with the tree structure in mind, nodes are assigned one of four statuses: root node, intermediate parent node, leaf node, and idle node. Root node refers to the singular node that connects to an external network, while leaf nodes are child nodes disallowed from having any downstream connections. Intermediate parent nodes refer to nodes part of the network that are neither root nor leaf nodes. Finally, idle nodes refer to nodes that are yet to join the network. \cite{esp-mesh-docs}.
+
+% \begingroup
+%     \centering
+%     \medskip
+%     \includegraphics[width=0.8\columnwidth]{final-proposal/images/esp_mesh_node_types.png}
+%     \captionof{figure}{ESP-MESH Node Types \\ Source: Adapted from \cite{esp-mesh-docs}}
+%     \label{fig:modeling_complex}
+%     \medskip
+% \endgroup
+
+%  An ESP-MESH network is built by first selecting a root node. Next, downstream connections are formed layer by layer, until all detected nodes are part of the network. Root node selection can happen autonomously or by user selection. Autonomous root node selection is a voting process that depends on the Received Signal Strength Indication (RSSI) of the node. In short, the node with the strongest signal, or RSSI, to the external gateway will likely receive the most votes from other nodes and prevail as the root node. In user selection, the root node is manually selected \cite{esp-mesh-docs}. It is important to note that the leader selection here is separate from the leader selection in the consensus algorithm. 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ESP-MESH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Start 
+% --> mesh.init() 
+% --> mesh.onReceive() 
+% --> mesh.onNewConnection()
+% --> mesh.onChangedConnections()
+% --> mesh.sendSingle()
+% --> mesh.sendBroadcast()
+% --> userScheduler.addTask()
+
+
+% % Define block styles
+% \tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+%                         text width=4.5em, 
+%                         text badly centered, 
+%                         node distance=3cm, 
+%                         inner sep=0pt]
+% \tikzstyle{rblock} = [rectangle, draw, fill=blue!20, 
+%                     text width=7em, 
+%                     text centered, 
+%                     rounded corners, 
+%                     minimum height=4em]
+% \tikzstyle{mblock} = [rectangle, draw, fill=orange!20, 
+%                     text width=7em, 
+%                     text centered, 
+%                     rounded corners, 
+%                     minimum height=4em]
+% \tikzstyle{arrow} = [thick, ->, >=stealth]
+
+
+% \begin{figure}[H]
+%     \centering
+%         \begin{tikzpicture}[node distance = 2cm, auto]
+        
+%         % Place nodes
+%         \node [mblock]                       (init)      {Initialize painlessMesh};
+%         \node [rblock, below of=init]        (follower)  {Switch to follower mode};
+%         \node [rblock, below of=follower, 
+%                       node distance=3cm]     (elect)     {Start an election};
+%         \node [mblock, right of=elect,
+%                       node distance=5cm]     (broadcast) {Broadcast the election};
+%         \node [rblock, below of=elect]       (candidate) {Switch to candidate mode};
+%         \node [rblock, below of=candidate]   (leader)    {Switch to leader mode};
+%         % \node [block, below of=identify]    (evaluate)  {evaluate candidate models};
+%         % \node [decision, below of=evaluate] (decide)    {is best candidate better?};
+        
+%         % Draw edges
+%         \draw [arrow] (init)     -- (follower);
+%         \draw [arrow] (follower) -- node[anchor=east]{On timeout} (elect);
+%         \draw [arrow] (elect) -- (broadcast);
+%         % \path [line] (identify) -- (evaluate);
+%         % \path [line] (evaluate) -- (decide);
+%         % \path [line] (decide) -| node [near start] {yes} (update);
+%         % \path [line] (update) |- (identify);
+%         % \path [line] (decide) -- node {no}(stop);
+            
+%         \end{tikzpicture}
+%     \caption{Caption}
+%     \label{fig:my_label}
+% \end{figure}
+ 
+ 

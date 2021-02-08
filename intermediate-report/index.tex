@@ -1,7 +1,7 @@
 \documentclass[compsoc]{IEEEtran}
 
 %%%%%%% USE PACKAGES %%%%%%%
-\include{final-proposal/includes}
+\include{intermediate-report/includes}
 
 %%%%%%% CONFIGURATION %%%%%%%
 \usetikzlibrary{positioning}
@@ -43,6 +43,21 @@
 \newcommand{\advisorTwoName}{Jabari, Saif E.}
 \newcommand{\group}{Group 7}
 
+%%%%%%% \thickhline for tables %%%%%%%
+\makeatletter
+\def\thickhline{%
+  \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+   \reserved@a\@xthickhline}
+\def\@xthickhline{\ifx\reserved@a\thickhline
+               \vskip\doublerulesep
+               \vskip-\thickarrayrulewidth
+             \fi
+      \ifnum0=`{\fi}}
+\makeatother
+
+\newlength{\thickarrayrulewidth}
+\setlength{\thickarrayrulewidth}{3\arrayrulewidth}
+
 %%%%%%% TUNABLES %%%%%%%
 \setlength{\cftbeforesecskip}{7pt}
 \setlength{\cftbeforesubsecskip}{7pt}
@@ -55,72 +70,77 @@
 \titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 \titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 
+\setlength{\belowcaptionskip}{-10pt}
+
+
+
 \begin{document}
 
 %%%%%%% COVER PAGE %%%%%%%
-\include{final-proposal/cover}
+\input{final-proposal/cover}
 
 %%%%%%% TABLE OF CONTENTS %%%%%%%
-
 \tableofcontents
 
-%%%%%%% TITLE (unused) %%%%%%%%
-
-% \title{\LARGE Design and Development of a Raft Consensus Algorithm Coupled With a IEEE 802.11 Based Mesh Network for Embedded Systems
-% \\ 
-
-% {\Large Capstone Fall 2020 Intermediate Report}
-% }
-
-% \author{
-%     \IEEEauthorblockN{Barkin Simsek}
-%     \IEEEauthorblockA{
-%         BSc. Computer Engineering
-%         \\
-%         \textit{bs3528@nyu.edu}
-%     }
-    
-%     \and
-    
-%     \IEEEauthorblockN{Nishant Aswani}
-%     \IEEEauthorblockA{
-%       BSc. Computer Engineering
-%         \\
-%         \textit{nsa325@nyu.edu}
-%     }
-% }
-
+%%%%%%% REPORT BEGINNING %%%%%%%
 \newpage
 \setstretch{1.25}
 
 %%%%%%% ABSTRACT %%%%%%%
-\include{final-proposal/abstract}
+\input{intermediate-report/abstract}
 
 %%%%%%% BACKGROUND RESEARCH %%%%%%%
-\include{final-proposal/background-research}
+\newpage
+\input{intermediate-report/background-research}
 
 %%%%%%% PROBLEM DEFINITION %%%%%%%
-\include{final-proposal/problem-definition}
+\newpage
+\input{intermediate-report/problem-definition}
 
 %%%%%%% DESIGN CONSTRAINTS %%%%%%%
-\include{final-proposal/design-constraints}
+\newpage
+\input{intermediate-report/design-constraints}
 
 %%%%%%% CONCEPTUALIZATION %%%%%%%
-\include{final-proposal/conceptualization}
+\newpage
+\input{intermediate-report/conceptualization}
 
 %%%%%%% CRITERIA FOR DESIGN EVALUATION AND TESTING %%%%%%%
-\include{final-proposal/eval-testing}
+\newpage
+\input{intermediate-report/eval-testing}
+
+%%%%%%% DELIVERABLE STATEMENT %%%%%%% 
+\input{intermediate-report/deliverables}
 
 %%%%%%% MODELLING, SIMULATION, AND OPTIMIZATION/EXPERIMENTAL PLAN %%%%%%%
-\include{final-proposal/mod-sim}
+\newpage
+\input{intermediate-report/mod-sim}
+
+%%%%%%% FINAL DESIGN %%%%%%%
+\newpage
+\input{intermediate-report/final-design}
+
+%%%%%%% IMPACT OF THE COVID-19 PROJ %%%%%%%
+\input{intermediate-report/covid-impact}
+
+%%%%%%% ETHICS %%%%%%%
+% No new page - On the same page as final design
+\input{intermediate-report/ethics}
+
+%%%%%%% BILL OF MATERIALS %%%%%%%
+% No new page - On the same page as ethics
+\input{intermediate-report/bill-of-materials}
 
 %%%%%%% PROJECT MANAGEMENT %%%%%%%
-\include{final-proposal/project-management}
+\newpage
+\input{intermediate-report/project-management}
 
 %%%%%%% BIBLIOGRAPHY %%%%%%%
-
 \newpage
 \printbibliography[heading=bibintoc,title={References}]
 
+%%%%%%% APPENDIX %%%%%%%
+\newpage
+\input{intermediate-report/appendix}
 
 \end{document}

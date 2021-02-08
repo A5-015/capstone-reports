@@ -1,0 +1,304 @@
+\section{Pugh Charts}
+\label{sec:pugh-chart-appendix}
+
+\subsection{Networking Library}
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking library with easyMesh as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Library} & Documentation & Compatibility & Routing Method & Framework Restriction & Sum \\
+        \thickhline
+        easyMesh         & Base & Base & Base & Base &   \\ \hline
+        painlessMesh     & 1 & 0 & 0 & 0 & 1 \\ \hline
+        ESP-MESH         & 1 & -1 & 0 & 0 & 0\\ \hline
+        ESP8266 Wifi Mesh & 0 & 0 & -1 & -1 & -2  \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking library with painlessMesh as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Library} & Documentation & Compatibility & Routing Method & Framework Restriction & Sum \\
+        \thickhline
+        easyMesh         & -1 & 0 & 0 & 0 & -1 \\ \hline
+        painlessMesh     & Base & Base & Base & Base &   \\ \hline
+        ESP-MESH         & 1 & -1 & 0 & 0 & -1 \\ \hline
+        ESP8266 Wifi Mesh & -1 & 0 & -1 & -1 & -3 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking library with ESP-MESH as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Library} & Documentation & Compatibility & Routing Method & Framework Restriction & Sum \\
+        \thickhline
+        easyMesh         & -1 & 1 & 0 & 0 & 0 \\ \hline
+        painlessMesh     & -1 & 1 & 0 & 0 & 0 \\ \hline
+        ESP-MESH         & Base & Base & Base & Base &   \\ \hline
+        ESP8266 Wifi Mesh & -1 & 1 & -1 & -1 & -4 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking library with ESP8266 Wifi Mesh as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Library} & Documentation & Compatibility & Routing Method& Framework Restriction & Sum \\
+        \thickhline
+        easyMesh          & 1 & 0 & 1 & 1 & 3 \\ \hline
+        painlessMesh      & 0 & 0 & 1 & 1 & 2 \\ \hline
+        ESP-MESH          & 1 & -1 & 1 & 1 & 2 \\ \hline
+        ESP8266 Wifi Mesh & Base & Base & Base & Base &   \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+% We see that painlessMesh is the best mesh networking library to work with given its superior documentation and compatibility with our selected hardware. 
+
+\newpage
+
+\subsection{Networking Topology}
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking topology with hub-spoke topology as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Simplicity & Failure Risk & Collision & Scalability & Sum \\
+        \thickhline
+        Hub-Spoke   & Base & Base & Base & Base &   \\ \hline
+        Mesh        & -1 & 1 & 0 & 1 & 2\\ \hline
+        Ring        & 0 & -1 & 0 & 0 & -1\\ \hline
+        Bus         & 0 & 1 & -1 & -1 & -1\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking topology with mesh topology as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Simplicity & Failure Risk & Collision & Scalability & Sum \\
+        \thickhline
+        Hub-Spoke   & 1 & -1 & 0 & -1 & -1\\ \hline
+        Mesh        & Base & Base & Base & Base &   \\ \hline
+        Ring        & 1 & -1 & 0 & 0 & 0\\ \hline
+        Bus         & 1 & 0 & -1 & -1 & -1\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking topology with ring topology as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Simplicity & Failure Risk & Collision & Scalability & Sum \\
+        \thickhline
+        Hub-Spoke   & 0 & -1 & 0 & -1 & -2\\ \hline
+        Mesh        & -1 & 1 & 0 & 1 & 1\\ \hline
+        Ring        & Base & Base & Base & Base &   \\ \hline
+        Bus         & 0 & 1 & -1 & -1 & -1\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking topology with bus topology as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Simplicity & Failure Risk & Collision & Scalability & Sum \\
+        \thickhline
+        Hub-Spoke   & 0 & -1 & 1 & 0 & 0\\ \hline
+        Mesh        & -1 & 1 & 1 & 1 & 2\\ \hline
+        Ring        & 0 & -1 & 1 & 1 & 1\\ \hline
+        Bus        & Base & Base & Base & Base &   \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+% For the applications we consider, a mesh topology is the most appropriate topology.
+
+\newpage
+
+\subsection{Networking Protocol}
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking protocol with 802.11 as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Popularity & Data Rate & Power Consumption & Scalability & Sum \\
+        \thickhline
+        IEEE 802.11   & Base & Base & Base & Base &   \\ \hline
+        IEEE 802.15.4 (Zigbee)      & -1 & -1 & 1 & 0 & -1\\ \hline
+        IEEE 802.15.3 (UWB)         & -1 & 1 & 0 & -1 & -1\\ \hline
+        IEEE 802.15.1 (BT)          & -1 & -1 & 1 & -1 & -2\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking protocol with 802.15.4 (Zigbee) as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Popularity & Data Rate & Power Consumption & Scalability & Sum \\
+        \thickhline
+        IEEE 802.11                 & 1 & 1 & -1 & 0 & 1\\ \hline
+        IEEE 802.15.4               & Base & Base & Base & Base &   \\ \hline
+        IEEE 802.15.3 (UWB)         & 0 & 1 & -1 & -1 & -1\\ \hline
+        IEEE 802.15.1 (BT)          & 1 & 1 & 0 & -1 & 1\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking protocol with 802.15.3 (UWB) as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Popularity & Data Rate & Power Consumption & Scalability & Sum \\
+        \thickhline
+        IEEE 802.11                 & 1 & -1 & 0 & 1 & 1\\ \hline
+        IEEE 802.15.4               & 1 & -1 & 1 & 1 & 2\\ \hline
+        IEEE 802.15.3 (UWB)         & Base & Base & Base & Base &   \\ \hline
+        IEEE 802.15.1 (BT)          & 1 & -1 & 1 & 0 & 1\\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for networking protocol with 802.15.1 (BT) as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Networking Topology} & Popularity & Data Rate & Power Consumption & Scalability & Sum \\
+        \thickhline
+        IEEE 802.11                 & 1 & 1 & -1 & 1 & 2\\ \hline
+        IEEE 802.15.4               & 0 & 0 & 0 & 1 & 1\\ \hline
+        IEEE 802.15.3 (UWB)         & 0 & 1 & -1 & 0 & 0\\ \hline
+        IEEE 802.15.1 (BT)          & Base & Base & Base & Base &   \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier

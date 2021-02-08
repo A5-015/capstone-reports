@@ -1,0 +1,143 @@
+\documentclass[compsoc]{IEEEtran}
+
+%%%%%%% USE PACKAGES %%%%%%%
+\include{final-proposal/includes}
+
+%%%%%%% CONFIGURATION %%%%%%%
+\usetikzlibrary{positioning}
+
+\renewcommand{\sfdefault}{ppl}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{\vert}{\vert}
+
+\usepackage[style=ieee]{biblatex}
+\DeclareLanguageMapping{english}{english-apa}
+\addbibresource{references.bib}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% \pagestyle{head}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{11pt}
+
+%%%%%%% ONE COLUMN %%%%%%% 
+\onecolumn
+\raggedbottom
+
+%%%%%%% VARIABLES %%%%%%%
+\newcommand{\cc}[1]{\texttt{#1}}
+
+\newcommand{\studentOneName}{Aswani, Nishant}
+\newcommand{\studentTwoName}{Simsek, Barkin}
+\newcommand{\studentOneEmail}{nsa325@nyu.edu}
+\newcommand{\studentTwoEmail}{bs3528@nyu.edu}
+\newcommand{\advisorOneName}{Karau, Matt}
+\newcommand{\advisorTwoName}{Jabari, Saif E.}
+\newcommand{\group}{Group 7}
+
+%%%%%%% \thickhline for tables %%%%%%%
+\makeatletter
+\def\thickhline{%
+  \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+   \reserved@a\@xthickhline}
+\def\@xthickhline{\ifx\reserved@a\thickhline
+               \vskip\doublerulesep
+               \vskip-\thickarrayrulewidth
+             \fi
+      \ifnum0=`{\fi}}
+\makeatother
+
+\newlength{\thickarrayrulewidth}
+\setlength{\thickarrayrulewidth}{3\arrayrulewidth}
+
+%%%%%%% TUNABLES %%%%%%%
+\setlength{\cftbeforesecskip}{7pt}
+\setlength{\cftbeforesubsecskip}{7pt}
+\setlength{\cftbeforesubsubsecskip}{7pt}
+
+\setcounter{tocdepth}{3}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+\setlength{\belowcaptionskip}{-10pt}
+
+
+
+\begin{document}
+
+%%%%%%% COVER PAGE %%%%%%%
+\input{final-proposal/cover}
+
+%%%%%%% TABLE OF CONTENTS %%%%%%%
+\tableofcontents
+
+%%%%%%% REPORT BEGINNING %%%%%%%
+\newpage
+\setstretch{1.25}
+
+%%%%%%% ABSTRACT %%%%%%%
+\input{final-proposal/abstract}
+
+%%%%%%% BACKGROUND RESEARCH %%%%%%%
+\newpage
+\input{final-proposal/background-research}
+
+%%%%%%% PROBLEM DEFINITION %%%%%%%
+\newpage
+\input{final-proposal/problem-definition}
+
+%%%%%%% DESIGN CONSTRAINTS %%%%%%%
+\newpage
+\input{final-proposal/design-constraints}
+
+%%%%%%% CONCEPTUALIZATION %%%%%%%
+\newpage
+\input{final-proposal/conceptualization}
+
+%%%%%%% CRITERIA FOR DESIGN EVALUATION AND TESTING %%%%%%%
+\newpage
+\input{final-proposal/eval-testing}
+
+%%%%%%% DELIVERABLE STATEMENT %%%%%%% 
+\input{final-proposal/deliverables}
+
+%%%%%%% MODELLING, SIMULATION, AND OPTIMIZATION/EXPERIMENTAL PLAN %%%%%%%
+\newpage
+\input{final-proposal/mod-sim}
+
+%%%%%%% FINAL DESIGN %%%%%%%
+\newpage
+\input{final-proposal/final-design}
+
+%%%%%%% ETHICS %%%%%%%
+% No new page - On the same page as final design
+\input{final-proposal/ethics}
+
+%%%%%%% BILL OF MATERIALS %%%%%%%
+% No new page - On the same page as ethics
+\input{final-proposal/bill-of-materials}
+
+%%%%%%% PROJECT MANAGEMENT %%%%%%%
+\newpage
+\input{final-proposal/project-management}
+
+%%%%%%% BIBLIOGRAPHY %%%%%%%
+\newpage
+\printbibliography[heading=bibintoc,title={References}]
+
+%%%%%%% APPENDIX %%%%%%%
+\newpage
+\input{final-proposal/appendix}
+
+\end{document}
