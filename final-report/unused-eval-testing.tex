@@ -1,0 +1,42 @@
+\section{Criteria for Design Evaluation and Testing}
+%\subsection{Evaluation Criteria}
+%\subsection{Testing Criteria}
+We will evaluate and test our design according to the following metrics:
+
+\begin{itemize}
+    \item \textit{Network Stability:}
+    \begin{itemize}
+        \item Defined as the percentage of packets delivered to the destination (PDR).
+        \item The final design will be tested to see if it can achieve a PDR of greater than 85\%.
+    \end{itemize}
+    
+    \item \textit{Network Realignment Time:}
+    \begin{itemize}
+        \item Defined as the time taken for all of the nodes to arrive to a consensus after the introduction of a new node. 
+        \item The final design will be tested to recover and realign itself in 1000\si{ms}.
+    \end{itemize}
+    
+    \item \textit{Data Transfer Speed \& Bandwidth:}
+    \begin{itemize}
+        \item Defined as the bits per second data transmission rate between nodes.
+        \item The final design will be tested to see if it can achieve a data rate of 8\si{Mbps} between nodes.
+    \end{itemize}
+    
+    \item \textit{Power Consumption:}
+    \begin{itemize}
+        \item Defined as the power consumption in watt measured on-board during a test session. 
+        \item The final design will be tested to consume lower than 100\si{mAh} on average for 10 hours usage.
+    \end{itemize}
+    
+    \item \textit{Scalability \& Coverage:}
+    \begin{itemize}
+        \item Defined as the number of nodes that can be a part of the network before deprecation of network quality within an area \si{m^2}. 
+        \item The final design will be tested to operate with 500 nodes in 1000\si{m^2}.
+    \end{itemize}
+    
+    \item \textit{Footprint}
+    \begin{itemize}
+        \item Defined as the storage space the library takes. 
+        \item The final compiled code will be tested to fit within 2\si{MB} of flash memory.
+    \end{itemize}
+\end{itemize}

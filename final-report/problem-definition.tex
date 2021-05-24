@@ -77,30 +77,36 @@ Autonomous devices with embedded systems and limited power and computational res
 %   cont -..-> localaction
 \end{figure}
 
-The black-box model of a node in the described system, broken into its sub-problems, is shown in Figure \ref{fig:black_box}. Each of these sub-problems is further discussed in the following sub-sections. The sensors on a node will be collecting data, which will then be fed into the decision logic, implemented as a consensus algorithm. Each of these nodes will be communicating with one another using a Wi-Fi-based mesh network and updating their logs as a result of this communication. Eventually, each of the nodes will then carry out some actuation or state indication.
+The black-box model of a node in the described system, broken into its sub-problems, is shown in Figure \ref{fig:black_box}. Each of these sub-problems is further discussed in the following sub-sections. A more detailed black-box model encompassing these details can be seen in Figure \ref{fig:final_design_node_bb}. 
+
+The sensors on a node will be collecting data, which will then be fed into the decision logic, implemented as a consensus algorithm. Each of these nodes will be communicating with one another using a Wi-Fi-based mesh network and updating their logs as a result of this communication. Eventually, each of the nodes will then carry out some actuation or state indication.
 
 As there are multiple implementations of an 802.11 based mesh network, it is out of the scope of this project to be able to interface with all of them. Our implementation will focus on what is readily available and will be designed in a way so that with minimal future development, another implementation of a mesh network could replace the one we use.
 
 There are also quite a few options for consensus algorithms. However, our system will be limited to a single consensus algorithm, namely Raft \cite{raft_paper}. Section \ref{conceptualization_consensus} describes the reasoning behind selecting Raft.
 
 
+\subsubsection{Network Topology}
+\label{section:network_topology}
+We conduct a detailed analysis of network topologies in Section \ref{section:background_research}. Figure \ref{fig:hub_spoke_mesh_diff} outlines two possible network topologies: mesh and hub-spoke.
+
 \subsubsection{Networking Protocols}
 \label{section:networking_protocols}
 There are a plethora of network types for wireless communication, often dependent on the application of the system. From literature, we identify four dominant protocols: Bluetooth, Ultra-wideband (UWB), Zigbee, LoRa, and Wifi \cite{lee2007comparative, ti_lethaby2017wireless}.
 
-Mesh networks are not limited to any one of these standards. In fact, "IoT-related wireless technologies [...] are extremely heterogeneous in terms of protocols, performance, reliability, latency, cost-effectiveness, and coverage",  \cite{iot_survey_cilfone2019wireless}. Each standard has its niche of operation: IoT devices may employ the IEEE 802.15.4 standard or Bluetooth for short-range communications, whereas mid to long-range communications may make use of IEEE 802.11, which was amended in 2011 to support mesh networks \cite{ti_lethaby2017wireless, iot_survey_cilfone2019wireless}. Figure \ref{fig:comparison_protocols} shows a comparative performance analysis of LoRa, Zigbee, WiFi, and Bluetooth, highlighting how each protocol has its strengths and weaknesses.
+Mesh networks are not limited to any one of these standards. In fact, "IoT-related wireless technologies ... are extremely heterogeneous in terms of protocols, performance, reliability, latency, cost-effectiveness, and coverage",  \cite{iot_survey_cilfone2019wireless}. Each standard has its niche of operation: IoT devices may employ the IEEE 802.15.4 standard or Bluetooth for short-range communications, whereas mid to long-range communications may make use of IEEE 802.11, which was amended in 2011 to support mesh networks \cite{ti_lethaby2017wireless, iot_survey_cilfone2019wireless}. Figure \ref{fig:comparison_protocols} shows a comparative performance analysis of LoRa, Zigbee, WiFi, and Bluetooth, highlighting how each protocol has its strengths and weaknesses.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\columnwidth]{images/comp_perf_analysis.png}
+    \includegraphics[width=0.8\columnwidth]{images/comp_perf_analysis.png}
     \caption{Comparative performance analysis of four protocols. \\ Adapted from \cite{iot_survey_cilfone2019wireless}}
     \label{fig:comparison_protocols}
 \end{figure}
 
 
 While the implementation of mesh networks and consensus algorithms are agnostic to the protocol underneath, it is important to address these concepts in the context of real-world constraints. Current IoT research "assumes that the devices are equipped with low-power IEEE 802.15.4 (Zigbee) transceivers" \cite{disney_glaropoulos2013enhanced}. Yet, a significant portion of deployed embedded systems and consumer electronics carry IEEE 802.11 compatible hardware \cite{disney_glaropoulos2013enhanced}. 
-The "wide penetration of IEEE 802.11" \cite{disney_glaropoulos2013enhanced} then makes it the more attractive choice because the hardware does not need to be redeployed to support newer standards. Despite 802.11's notoriety as high power consumption, research indicates that additional firmware controlling the sleep schedule can help lead to significant energy savings \cite{disney_glaropoulos2013enhanced, barghi2019practicalpower}
+The "wide penetration of IEEE 802.11" \cite{disney_glaropoulos2013enhanced} then makes it the more attractive choice because the hardware does not need to be redeployed to support newer standards. Despite 802.11's notoriety as high power consumption, research indicates that additional firmware controlling the sleep schedule can help lead to significant energy savings \cite{disney_glaropoulos2013enhanced, barghi2019practicalpower}.
 
 Furthermore, 802.11 has built-in support for mesh networks as a result of the 802.11s amendment. The amendment describes mesh stations (mesh STAs) and their ability to link with one another without the requirement of a central AP; rather, certain nodes may act as mesh access points (MAP) to connect to another network \cite{iov_wu2016internet, optical_zeitgeist_laboratory_2011}.
 
@@ -115,17 +121,17 @@ The distributed consensus algorithms can be classified into three categories bas
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\columnwidth]{images/consensus_types.png}
+    \includegraphics[width=0.99\columnwidth]{images/consensus_types.png}
     \caption{Left: A leaderless consensus algorithm, Middle: A leader-following consensus algorithm, Right: A containment control algorithm}
     \label{fig:consensus_types_detailed}
 \end{figure}
 
 
-The distributed consensus algorithms can also be classified into two categories based on when they transfer information to reach a consensus: \emph{time-triggered consensus algorithms} and \emph{event-triggered consensus algorithms} \cite{consensus_systems_survey}. In \emph{time-triggered consensus algorithms}, the nodes in the system initiate the information transfer once a set amount of time elapses. Additionally, if the consensus algorithm is asynchronous by design, each node can have a randomly set time duration before they send information. On the other hand, in \emph{event-triggered consensus algorithms}, the nodes in the system initiate information transfer when an external event occurs. A visualization of the different types of consensus algorithms can be seen in Figure \ref{fig:consensus_time_based_and_evevent_based}, where orange circles represent the timer of the nodes, green arrow represents the external event trigger, and red arrows represent the information transfer.
+The distributed consensus algorithms can also be classified into two categories based on when they transfer information to reach a consensus: \emph{time-triggered consensus algorithms} and \emph{event-triggered consensus algorithms} \cite{consensus_systems_survey}. In \emph{time-triggered consensus algorithms}, the nodes in the system initiate the information transfer once a set amount of time elapses. Additionally, if the consensus algorithm is asynchronous by design, each node can have a randomly set time duration before they send information. On the other hand, in \emph{event-triggered consensus algorithms}, the nodes in the system initiate information transfer when an external event occurs. A visualization of the different types of consensus algorithms can be seen in Figure \ref{fig:consensus_time_based_and_evevent_based}, where orange circles represent the timer of the nodes, the green arrow represents the external event trigger, and red arrows represent the information transfer.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\columnwidth]{images/consensus_time_based_and_evevent_based.png}
+    \includegraphics[width=0.55\columnwidth]{images/consensus_time_based_and_evevent_based.png}
     \caption{Left: A time-triggered consensus algorithm exchanging messages when the timer goes off, Right: An event-triggered consensus algorithm exchanging messages when an event occurs (green arrow)}
     \label{fig:consensus_time_based_and_evevent_based}
 \end{figure}
@@ -136,6 +142,11 @@ Paxos and Raft are among the most popular \& practical distributed \emph{time-tr
 Microcontroller units (MCUs) are a hefty consideration for any IoT solution. Unsurprisingly, there is a large variety of MCUs at different levels of "memory, power, computational capability, architecture etc." \cite{bansal2020iotsurveydevices} for various applications. These devices sit at different levels of the IoT ecosystem, implying that not all devices are required to be homogeneous in their capabilities. For discussion purposes, we adopt the classification system described in Bansal & Kumar's survey of IoT technologies \cite{bansal2020iotsurveydevices}. Class 0 devices may have 1-50KB of RAM with clock speeds below 100MHz, class 1 devices range from 100KB-100MB of RAM with clock speeds between 100MHz-1.5Ghz, and class 2 devices generally have resources greater than those of class 1 \cite{bansal2020iotsurveydevices}. Typically, class 0 devices such as the TELOSB are employed for Wireless Sensor Network (WSN) use-cases to collect data and perhaps perform simple actuation. On the other hand, class 1 devices, such as the well-known Raspberry Pis, are more suitable for coordination, media processing, data filtering tasks, etc.
 
 Given our design constraints, namely dynamic topology, and decision-making capabilities, we would expect this system to work with embedded systems on mobile technologies such as drones, vehicles, and rovers. While such devices are often fitted with class 2 devices, the goal of our project is to be able to deploy such a networking ability on class 1 devices as well. Espressif's ESP8266 chip stands out as an option: the chip is designed to be a WiFi chip with a focus on low-cost and minimal peripherals. The MCU operates between 80-160MHz and has 50KB of SRAM with up to 16MB of external flash memory \cite{espressif:esp8266}, so it is on the lower end of the class 1 category. Moreover, there is a decent open-source community dedicated to the MCU, and Espressif has released a mesh networking software development kit (SDK) for its chips with detailed documentation \cite{esp-mesh-docs}. 
+
+\subsubsection{Networking Library}
+Networking libraries function as an abstraction layer for software projects to handle communication between various devices. Networking libraries usually operate on layer-3 (network layer) or layer-2 (data link layer) of the Open Systems Interconnection model (OSI model) in order to ensure an efficient, reliable, and fast delivery of the packets sent \cite{perlman1988choosing}. Furthermore, networking libraries are often capable of forming different network topologies, such as mesh and hub-spoke, based on the user choices in order to increase resiliency \cite{riggio2008hardware}.
+
+Since Espressif's ESP8266 chip is capable of functioning as both Station (STA) and Access Point (AP) simultaneously \cite{espressif:esp8266}, there are networking libraries such as painlessMesh, ESP8266 WiFi mesh, Arduino WiFi for creating both mesh and hub-spoke networks \cite{yoppyperformance}. Among these networking libraries, painlessMesh is one of the more practical and easy to configure options. The library forms an "ad-hoc network which requires neither routing plan nor central controller"  \cite{yoppyperformance} for the resource-limited ESP8266 boards. painlessMesh uses the boards' unique 32-bit MAC addresses \cite{painlessMesh} in order to decrease network setup overhead and distinguish each node in the network, instead of using Internet Protocol (IP) addresses. Furthermore, painlessMesh time synchronizes all nodes "with a precision of less than 10 ms," \cite{yoppyperformance} allowing for real-time synchronized voting in the Raft consensus algorithm. Finally, painlessMesh also makes use of multi-hop messages in the mesh network \cite{painlessMesh} to improve network coverage and reliability of packet delivery. 
 
 
 \subsection{Problem Statement}
@@ -150,18 +161,20 @@ We have identified the problem to be the lack of a flexible and easy to access s
 
 In order to address this problem, we aim to create an open-source software library that can be incorporated into an application that requires nodes to work autonomously together. We plan to demonstrate our software library through prototype boards that will each consist of an ESP8266 MCU, power sensors, and LEDs. Our software library will be installed on these boards, enabling them to form a mesh network and run the Raft consensus algorithm. We will show how a signal propagates in the Raft consensus algorithm within the mesh network using LEDs, as shown in Figure \ref{fig:mesh_signal_propagation}. We will also demonstrate how the network can realign \& recover by turning on and off randomly selected ESP8266 microcontrollers to emulate a dynamic environment.
 
+Furthermore, with our software library, we aim to achieve a packet delivery rate of a minimum of 95\% and an average latency smaller than 20ms between nodes on the mesh network while having a maximum leader selection time of 1000ms for the Raft consensus algorithm. The software library should also be able to accommodate at least 100 nodes in the mesh network and have a total size of 2MB when compiled with the avr-gcc compiler.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\columnwidth]{images/mesh_signal_propagation.png}
+    \includegraphics[width=0.8\columnwidth]{images/mesh_signal_propagation.png}
     \caption{An ESP8266 cluster transitioning to the blue state from the red state using our software library. Red and blue LEDs are used to represent the states.}
     \label{fig:mesh_signal_propagation}
 \end{figure}
 
 % giving specs and constraints in quantitative terms
 
-Furthermore, with our software library, we aim to achieve a packet delivery rate of a minimum 95\% and an average latency smaller than 20ms between nodes on the mesh network while having a maximum leader selection time of 1000ms for the Raft consensus algorithm. The software library should also be able to accommodate at least 500 nodes in the mesh network and have a total size of 2MB when compiled with the avr-gcc compiler.
 
 
+\newpage
 \subsection{Design Constraints}
 \subsubsection{Technical}
 
@@ -177,13 +190,13 @@ Taking into account market demands, the history of the topic, and potential appl
     \item \textit{Scalability:} 
     \begin{itemize}
         \item The system should be able to perform with various densities of nodes. For example, increasing the number of nodes in a given area should not significantly increase latency. 
-        \item The final design aims to support at least 500 nodes in an area covering 1000\si{m^2}.
+        \item The final design aims to support at least 100 nodes in an area covering 1000\si{m^2}.
     \end{itemize}
     
     \item \textit{Low power consumption:}
     \begin{itemize}
         \item Since this system is centered around embedded devices deployed in the real-world, the implementation should consider limitations in access to power. 
-        \item The final design is aimed to be consuming below 100\si{mAh} on average use.
+        \item The final design is aimed to be consuming below 100\si{mA} on average use.
     \end{itemize}
     
     \item \textit{Small footprint:} 

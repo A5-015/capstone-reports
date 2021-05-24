@@ -1,0 +1,325 @@
+\section{Project Management}
+\subsection{Work Breakdown Structure}
+The project was broken down into sub-tasks, and each subtask's length of completion was estimated in days as shown in Table \ref{tab:work_breakdown_structure}. The \emph{work breakdown structure} has been designed to keep the project on track but is flexible enough to allow for any future adjustments needed to complete the project successfully.
+
+\textit{Table \ref{tab:work_breakdown_structure} only captures the two highest levels of work breakdown due to space constraints. Further levels of work can be found in our \href{https://github.com/A5-015/ramen/issues?q=is\%3Aissue+sort\%3Aupdated-desc}{GitHub issues webpage.} We decided to choose this method due to its dynamic nature.}
+
+\textit{Here is the link to our GitHub issues webpage:}\\
+\url{https://github.com/A5-015/ramen/issues}
+
+\begin{table}[H]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.125}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%% HELPER FUNCTIONS %%%%%%%% 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    % Set current date [YYYY-MM-DD]
+    \newcommand{\setCurrDate}[3]{\setdatenumber{#1}{#2}{#3}}
+    
+    % Custom date format
+    \def\datedate{\thedatemonth/\thedateday/\thedateyear}
+    %\def\datedate{\thedateday-\thedatemonth-\thedateyear}
+    
+    % Takes number of days as an argument and prints "arg1 & DATE & DATE+arg1"
+    \newcommand{\TEdate}[1]{
+        \setdatebynumber{\thedatenumber}
+        \multicolumn{1}{c}{#1} & 
+        \datedate & 
+        \addtocounter{datenumber}{#1} \setdatebynumber{\thedatenumber}
+        \datedate
+    }
+    
+    % Stuff for numbering table items
+    \newcounter{TableEntryID}
+    \newcounter{SubTableEntryID}
+    \setcounter{SubTableEntryID}{0}
+    \setcounter{TableEntryID}{0}
+    \newcommand\showTE{\setcounter{SubTableEntryID}{0}\stepcounter{TableEntryID}\theTableEntryID.\theSubTableEntryID \ }
+    \newcommand\showSubTE{\stepcounter{SubTableEntryID}\theTableEntryID.\theSubTableEntryID \ }
+    
+    % Stuff for automating table rows
+    \newcommand{\tableEntry}[1]{\hline \multirow{2}{*}{\showTE #1}}
+    \newcommand{\subTableEntry}[2]{& \showSubTE #1 & \TEdate{#2} \\ \cline{2-5}}
+    \newcommand{\initialTableEntry}[2]{&0.1 #1 & \TEdate{#2} \\ \cline{2-5}}
+    \newcommand{\finalTableEntry}[2]{\hline &\showTE #1 & \TEdate{#2} \\ \hline}
+    
+    \vspace{10pt}
+    \caption{Work breakdown structure of the project}
+    \label{tab:work_breakdown_structure}
+    
+    \begin{center}
+        \begin{tabular}{|l|p{30em}|p{3.5em}|r|r|}
+            % Table HEAD
+            \hline
+            \multicolumn{2}{|l|}{\multirow{3}{9cm}{\textbf{ramen: Design and Development of a Raft Consensus Algorithm Coupled With a IEEE 802.11 Based Mesh Network for Embedded Systems}}} & \multicolumn{3}{c|}{Dates and Duration} \\ \cline{3-5}
+            \multicolumn{2}{|l|}{ } & Duration (Days) & \multicolumn{2}{c|}{Planned Dates} \\ \cline{3-5}
+            \multicolumn{2}{|l|}{ } & & \multicolumn{1}{c}{Start} & \multicolumn{1}{|c|}{End} \\ \hline
+            
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%% ACTUAL TABLE DATA STARTS HERE %%%%%%%% 
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            \setCurrDate{2020}{09}{06}
+            \initialTableEntry{Begin Project}{1}
+            
+        	\tableEntry{Background Research}
+        	    \subTableEntry{Research on existing problems in IoT devices}{3}
+            	\subTableEntry{Research on existing problems in embedded devices}{3}
+            	\subTableEntry{Research on currently existing solutions}{3}
+            	\subTableEntry{Identifying technical \& non-technical constraints}{4}
+            	\subTableEntry{Revise problem statement}{1}
+        	
+        	\tableEntry{Generate Concepts}
+        	    \subTableEntry{Functionality decompose of the project}{1}
+            	\subTableEntry{Research on literature for similar solutions}{5}
+             	\subTableEntry{Experimenting with existing consensus and mesh networking protocols protocols}{3}
+             	\subTableEntry{Consensus protocol, network topology, and  microprocessors selection}{2}
+            	
+        	\tableEntry{Begin Detailed Design}
+        	    \subTableEntry{Perform detailed analysis of the concepts}{2}
+        	    \subTableEntry{Perform detailed analysis of the available components}{5}
+        	    \subTableEntry{Select components}{2}
+            	\subTableEntry{Perform simulations with consensus algorithms}{5}
+            	\subTableEntry{Perform simulations with WiFi chips}{5}
+            	\subTableEntry{Create workflow diagrams for the code}{2}
+        	
+        	\tableEntry{Build Prototype}
+        	    \subTableEntry{Create a GitHub repository}{1}
+        	    \subTableEntry{Code a mesh network for ESP8266 chip}{20}
+        	    \subTableEntry{Adapt the Raft consensus algorithm for mesh networks}{25}
+        	    \subTableEntry{Code an adapter for our Raft implementation for ESP8266 chip specifically}{25}
+        	    \subTableEntry{Ensure the functionality of connection between the Raft consensus algorithm implementation and the mesh networking adapter}{5}
+        	    \subTableEntry{Write tests for the code}{5}
+            	\subTableEntry{CAD drawings for the enclosure}{4}
+            	\subTableEntry{Design the PCB}{10}
+            	\subTableEntry{Order the PCB for fabrication}{2}
+            	\subTableEntry{Purchase the PCB components}{5}
+            	\subTableEntry{Assemble the PCB}{3}
+            	\subTableEntry{3D printing the enclosure}{2}
+            	\subTableEntry{Assembling the prototype}{3}
+            	\subTableEntry{Upload the code to the prototype}{2}
+            	\subTableEntry{Check the functionality of the prototype and the code}{5}
+        	
+        	\tableEntry{Test Prototype}
+            	\subTableEntry{Develop testing protocol}{7}
+            	\subTableEntry{Perform tests}{7}
+        	
+        	\tableEntry{Documentation and Reporting}
+        	    \subTableEntry{Generating documentation from the code}{2}
+            	\setCurrDate{2020}{10}{01}\subTableEntry{Preparation of the Intermediary Report I}{10}
+            	\setCurrDate{2020}{11}{20}\subTableEntry{Preparation of the Final Proposal}{10}
+            	\subTableEntry{Preparation of the Proposal Presentation}{8}
+            	\setCurrDate{2021}{2}{18}\subTableEntry{Preparation of the Intermediary Report II}{10}
+            	\setCurrDate{2021}{4}{20}\subTableEntry{Preparation of the Final Poster}{8}
+            	\subTableEntry{Preparation of the Final Report}{3}
+        	
+        	\finalTableEntry{End Project}{1}
+        	
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\newpage
+\subsection{Design Structure Matrix}
+To complement the \emph{work breakdown structure}, a \emph{design structure matrix}, shown in Table \ref{tab:design_structure_matrix}, was created. The \emph{design structure matrix} is meant to organize our tasks and streamline our workflow.
+
+
+\begin{table}[H]
+    \scriptsize
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    \caption{Design structure matrix of the project}
+    \label{tab:design_structure_matrix}
+    \begin{tabular}{r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+        \cline{2-16}
+                                        &   & A & B & C & D & E & F & G & H & I & J & K & L & M & N \\ \cline{2-16}
+         Begin Project                  & A & A &   &   &   &   &   &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Background Research            & B & X & B &   &   &   &   &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Consensus Algorithm Selection  & C &   & X & C &   &   &   &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Network Topology Selection     & D &   & X &   & D &   &   &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Concept Generation             & E &   &   & X & X & E &   &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Detailed Design                & F &   &   & X & X & X & F &   &   &   &   &   &   &   &   \\ \cline{2-16}
+         Simulation                     & G &   &   &   &   &   & X & G &   &   &   &   &   &   &   \\ \cline{2-16}
+         Finalize Design                & H &   &   &   &   &   & X & X & H &   &   &   &   &   &   \\ \cline{2-16}
+         Coding the software            & I &   &   & X & X & X &   & X & X & I &   &   &   &   &   \\ \cline{2-16}
+         CAD Drawings                   & J &   &   &   &   &   &   & X & X &   & J &   &   &   &   \\ \cline{2-16}
+         Purchase Components            & K &   &   &   &   &   &   &   & X &   & X & K &   &   &   \\ \cline{2-16}
+         Manufacture Components         & L &   &   &   &   &   &   &   &   &   & X & X & L &   &   \\ \cline{2-16}
+         Assembly and Testing           & M &   &   &   &   &   &   &   & X & X &   &   & X & M &   \\ \cline{2-16}
+         Finish Project                 & N &   &   &   &   &   &   &   &   &   &   &   &   & X & N \\
+        \cline{2-16}
+    \end{tabular}
+\end{table}
+
+
+\subsection{Critical Path}
+The \emph{critical path method} was used to identify the bottlenecks in the project. The duration for each project component was calculated in days and placed into the \emph{critical path} graph shown in Figure \ref{fig:critical_path}. After our analysis, we have determined that the critical path for our project is to implement the base software library, explore the implementation of a mesh network, adapt our library to interface with the mesh network and finally test our implementation.
+
+\begin{figure}[H]
+    \centering
+    
+    \resizebox{0.80\pdfpagewidth}{!}{
+        \begin{tikzpicture}
+        
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%% HELPER FUNCTIONS %%%%%%%% 
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            % Custom color
+            \definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+            
+            % Function for generating nodes in the graph
+            \newcommand{\pathNode}[5][black]{
+                \scriptsize
+                \node(#2)[shape=rectangle][#3] {
+                    \begin{tcolorbox}[
+                        rounded corners,
+                        colback=airforceblue!35,
+                        colframe=#1!80,
+                        arc=1.5mm,
+                        box align=center,
+                        halign=center,
+                        valign=center,
+                        text width=2cm,
+                        left=0.5mm,
+                        right=0.5mm,
+                        top=0.5mm,
+                        bottom=0.5mm,
+                        title = {\centering\makebox[\linewidth][c]{\color{white}#5 Days}}
+                    ]
+                    \color{black}#4
+                    \end{tcolorbox} \\
+                };
+            }
+            
+            % Function for generating a terminal node (like start % end) in the graph
+            \newcommand{\terminalNode}[4][black]{
+                \scriptsize
+                \node(#2)[circle, draw=#1!80, fill=airforceblue!35, very thick, minimum size=7mm][#3]{#4};
+            }
+            
+            % Function for drawing the arrows
+            \newcommand{\pathArrow}[2]{
+                \draw[->, very thick] (#1) -- (#2);
+            }
+        
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%%%%%%% ACTUAL GRAPH DATA STARTS HERE %%%%%%%% 
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            % Nodes
+            \terminalNode[red]{start}{}{Capstone Project}
+            
+            \pathNode[red]{software_1}{above right = of start, yshift=1cm, xshift=1cm}{Implement the Raft consensus algorithm for embedded systems}{30}
+            \pathNode[red]{software_4}{above right = of software_1, yshift=-1.25cm}{Creating an interface to work with painlessMesh}{20}
+            \pathNode[red]{software_5}{right = of software_4}{Developing a virtual simulation environment to test our Raft implementation}{15}
+            \pathNode{software_2}{below right = of software_1, yshift=1.25cm, xshift=2cm}{Running Raft consensus algorithm simulations in Coracle software for various network conditions}{20}
+            \pathNode[red]{software_3}{below right = of software_5, yshift=1cm}{Testing the code in a simulation for optimization}{15}
+            
+            
+            \pathNode{hardware_1}{below right = of start, xshift=1cm}{Component selection}{15}
+            \pathNode{hardware_4}{below right = of hardware_1, yshift=1.25cm}{Prototype enclosure design}{10}
+            \pathNode{hardware_2}{above right = of hardware_1, yshift=-1.25cm}{Schematic design}{10}
+            \pathNode{hardware_3}{right = of hardware_2}{PCB Design}{10}
+            \pathNode{hardware_5}{right = of hardware_4}{Manufacturing Components}{15}
+            
+            
+            \pathNode[red]{software_6}{right = of hardware_3, xshift=2.25cm}{Testing on the hardware}{10}
+            
+            % Arrows
+            \pathArrow{start.east}{software_1.west}
+            \pathArrow{start.east}{hardware_1.west}
+            
+            \pathArrow{software_1.east}{software_2.west}
+            \pathArrow{software_1.east}{software_2.west}
+            \pathArrow{software_1.east}{software_4.west}
+            \pathArrow{software_4.east}{software_5.west}
+            \pathArrow{software_2.east}{software_3.west}
+            \pathArrow{software_5.east}{software_3.west}
+            \pathArrow{software_3.south}{software_6.west}
+            
+            %\pathArrow{software_5.south}{software_2.north}
+            
+            \pathArrow{hardware_1.east}{hardware_4.west}
+            \pathArrow{hardware_1.east}{hardware_2.west}
+            \pathArrow{hardware_2.east}{hardware_3.west}
+            \pathArrow{hardware_3.south}{hardware_5.north}
+            \pathArrow{hardware_4.east}{hardware_5.west}
+            \pathArrow{hardware_4.east}{hardware_3.west}
+            \pathArrow{hardware_5.east}{software_6.west}
+            
+            \pathArrow{hardware_2.north}{software_2.west}
+    
+        \end{tikzpicture}
+    }
+    \caption{Critical path of the project tasks}
+    \label{fig:critical_path}
+\end{figure}
+
+
+
+
+
+\newpage
+\subsection{Gantt Chart}
+The \emph{Gantt Chart} shown in Figure \ref{fig:gantt} was used to visualize the tasks and their duration. The \emph{Gantt Chart} is meant to track our progress on the sub-tasks and overall progress on the project.
+
+\vspace{5mm}
+
+\ganttset{calendar week text = \small {\startday}}
+
+\hvFloat[rotAngle=0]{figure}{
+    \resizebox{0.8\pdfpagewidth}{!}{
+        \begin{ganttchart}[
+            newline shortcut=true,
+            bar label node/.append style={align=right},
+            time slot format = isodate, 
+            vgrid = {*{6}{dotted}, *{1}{dashed}},
+            hgrid,x unit=1mm,
+            hgrid style/.style={draw=black!5, line width=.75pt},
+            time slot format=little-endian,
+            linespacing=0.5]
+            {01-09-2020}{15-06-2021}
+            \gantttitlecalendar{year, month=shortname, week=4}\\
+            %%%%%%%%%%%%
+            \ganttgroup{Background Research}{07-09-2020}{21-09-2020} \\
+                \ganttbar{Research on existing problems}{7-9-2020}{13-9-2020} \\
+                \ganttbar{Research on currently existing solutions}{13-9-2020}{16-9-2020} \\
+                \ganttbar{Identifying technical \& non-technical constraints}{16-9-2020}{21-9-2020} \\
+            %%%%%%%%%%%%
+            \ganttgroup{Generate Concepts}{21-09-2020}{02-10-2020} \\
+                \ganttbar{Functionality decompose of the project}{21-9-2020}{22-9-2020} \\
+                \ganttbar{Research on literature for similar solutions}{22-9-2020}{27-9-2020} \\
+                \ganttbar{Experimenting with existing consensus \ganttalignnewline and mesh networking protocols protocols}{27-9-2020}{30-9-2020} \\
+                \ganttbar{Consensus protocol, network topology, \ganttalignnewline and  microprocessors selection}{30-9-2020}{02-10-2020} \\
+            %%%%%%%%%%%%
+            \ganttgroup{Begin Detailed Design}{02-10-2020}{23-10-2020} \\
+                \ganttbar{Perform detailed analysis of the concepts}{02-10-2020}{09-10-2020} \\
+                \ganttbar{Select components}{09-10-2020}{11-10-2020} \\
+                \ganttbar{Build development environment for Coracle simulations}{11-10-2020}{23-10-2020} \\
+            %%%%%%%%%%%%
+            \ganttgroup{Build Prototype}{23-10-2020}{17-02-2021} \\
+                \ganttbar{Implement Raft for embedded systems}{23-10-2020}{13-11-2020} \\
+                \ganttbar{Create interface for painlessMesh}{13-11-2020}{8-12-2020} \\
+                \ganttbar{Develop a virtual simulation environment for our implementation}{8-12-2020}{12-1-2021} \\
+                \ganttbar{PCB design and CAD drawings}{12-1-2021}{28-1-2021} \\
+                \ganttbar{Purchase the PCB components}{28-1-2021}{2-2-2021} \\
+                \ganttbar{Assembling the prototype}{2-2-2021}{17-2-2021} \\
+            %%%%%%%%%%%%
+            \ganttgroup{Test Prototype}{17-02-2021}{03-03-2021} \\
+                \ganttbar{Develop testing protocol in virtual environment}{17-2-2021}{24-2-2021} \\
+                \ganttbar{Perform tests on custom PCBs}{24-2-2021}{24-3-2021} \\
+            %%%%%%%%%%%%
+            \ganttgroup{Documentation and Reporting}{24-03-2021}{08-05-2021} \\
+                \ganttbar{Generating documentation from the code}{24-3-2021}{05-4-2021} \\
+                \ganttbar{Preparing Reports, Presentations, and Posters}{05-4-2021}{08-05-2021} \\
+            %%%%%%%%%%%%
+        \end{ganttchart}
+    }
+}[The Gantt Chart of the project timeline]{The Gantt Chart of the project timeline}{fig:gantt}

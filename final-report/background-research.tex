@@ -1,5 +1,5 @@
-
 \section{Background Research}
+\label{section:background_research}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Introduction %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 As of 2020, more than 50 billion devices are estimated to be using IEEE 802.11 based WiFi radios due to their low cost, robustness, and ease of use. \cite{G_Davis_2018}. The IEEE 802.11 standard, ratified in 1997, is a set of protocols for wireless communication to standardize the use of Wireless Local Area Networks (WLANs) \cite{perahia2013next}. This standardization, combined with the formation of the WiFi alliance and reduction in technological costs, led to the rapid adoption of wireless communication throughout the 2000s \cite{perahia2013next}. IEEE 802.11 made internet mobility a reality for everybody, proliferating the use of mobile technologies and paving the path for the future of communication. 
@@ -11,12 +11,12 @@ Since then, wireless communication has been evolving. Cars, drones, and traffic 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\columnwidth]{images/mesh_vs_hub_spoke.png}
+    \includegraphics[width=0.6\columnwidth]{images/mesh_vs_hub_spoke.png}
     \caption{Left: A mesh network topology, Right: A hub-spoke network topology}
-    \label{fig:consensus_mesh}
+    \label{fig:hub_spoke_mesh_diff}
 \end{figure}
 
-While a hub-spoke topology is sufficient for typical applications, certain use cases, especially at the "internet edge" \cite{howardCoracleEvaluatingConsensus2015} requires the resilience a mesh network provides. In the case of group robotics, "centralized systems [...] require a lot of computer performance from the commander" \cite{manet_drone_semenova2015network}. On the other hand, a mesh topology is "less prone to failure" \cite{manet_drone_semenova2015network} and allows for greater independence of each node. Similarly, vehicular networks require the consideration of a "highly dynamic topology" \cite{iov_wu2016internet} where nodes are moving at high speeds but also have "high-reliability requirements" \cite{iov_wu2016internet} due to safety concerns, making mesh topologies the sensible networking topology. 
+While a hub-spoke topology is sufficient for typical applications, certain use cases, especially at the "internet edge" \cite{howardCoracleEvaluatingConsensus2015} requires the resilience a mesh network provides. In the case of group robotics, "centralized systems ... require a lot of computer performance from the commander" \cite{manet_drone_semenova2015network}. On the other hand, a mesh topology is "less prone to failure" \cite{manet_drone_semenova2015network} and allows for greater independence of each node. Similarly, vehicular networks require the consideration of a "highly dynamic topology" \cite{iov_wu2016internet} where nodes are moving at high speeds but also have "high-reliability requirements" \cite{iov_wu2016internet} due to safety concerns, making mesh topologies the sensible networking topology. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Why consensus algorithms %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,7 +35,7 @@ Similar to the \textit{Byzantine Generals Problem}, in today's world, interconne
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\columnwidth]{images/consensus_traditional.png}
+    \includegraphics[width=0.6\columnwidth]{images/consensus_traditional.png}
     \caption{A consensus algorithm implemented on top of a hub-spoke network topology}
     \label{fig:consensus_traditional}
 \end{figure}
@@ -44,7 +44,7 @@ A consensus algorithm could be implemented on top of traditional hub-spoke netwo
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\columnwidth]{images/consensus_mesh.png}
+    \includegraphics[width=0.6\columnwidth]{images/consensus_mesh.png}
     \caption{A consensus algorithm implemented on top of a mesh network topology}
     \label{fig:consensus_mesh}
 \end{figure}

@@ -2,7 +2,7 @@
 
 \subsection{Initial Design Proposed}
 
-As delineated in Table \ref{tab:final_design_chart_options}, the final design will use the Raft consensus algorithm on an IEEE 802.11 based mesh topology through the painlessMesh networking library on an ESP8266 microcontroller.
+As delineated in Table \ref{tab:final_design_chart_options}, the final design will use the Raft consensus algorithm on an IEEE 802.11 based mesh topology using the painlessMesh networking library on an ESP8266 microcontroller.
 
 \begin{table}[H]
     \centering
@@ -90,11 +90,11 @@ Figure \ref{fig:final_design_node_bb} shows how nodes in the network will be com
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-25pt}
 \subsubsection{Microcontroller}
-The final design will use ESP8266 microcontrollers to run the required consensus algorithm and perform the networking functionality with its built-in IEEE 802.11 based WiFi module. As a part of the hardware demonstration, additional peripherals will be connected to the ESP8266 microcontroller. This will demonstrate the capabilities of the consensus algorithm on a mesh network by transferring information across the network. Figure \ref{fig:final_design_prototype} shows the block diagram for the peripherals that will be connected to the microcontroller on each node. The peripherals will help measure the performance of our software library and evaluate against the design criteria \& constraints defined in the previous sections of this report.
+The final design will use ESP8266 microcontrollers to run the required consensus algorithm and perform the networking functionality with its built-in IEEE 802.11 based WiFi module. As a part of the hardware demonstration, additional peripherals will be connected to the ESP8266 microcontroller. This will demonstrate the capabilities of the consensus algorithm on a mesh network by transferring information across the network. Figure \ref{fig:final_design_prototype} shows the block diagram for the peripherals that will be connected to the microcontroller on each node. The peripherals will help measure the performance of our software library and evaluate against the design criteria and constraints defined in the previous sections of this report.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/final_design_prototype.png}
+    \includegraphics[width=0.4\textwidth]{images/final_design_prototype.png}
     \caption{Block diagram for the hardware demonstration of the project}
     \label{fig:final_design_prototype}
     
@@ -176,7 +176,7 @@ Figure \ref{fig:data_flow} shows three nodes replicating the logs to achieve con
 
 \subsection{Changes Made to Initial Design}
 
-The changes to our design all stem from updates and improvements to our understanding of how to implement the software library. To concretize our design, we laid out our software library in a Unified Modeling Language (UML) diagram (Figure \ref{fig:uml}. We envision the software library to be broken down into three modules: the server, the data log, and the data queue. The server handles all the communication to achieve data consensus and interfaces with the data log and data queues. The data log is the data storage unit where each node stores data shared by the consensus leader. The data queue is a buffer where the client adds data to be sent to the leader.
+The changes to our design all stem from updates and improvements to our understanding of how to implement the software library. To concretize our design, we laid out our software library in a Unified Modeling Language (UML) diagram (Figure \ref{fig:uml}. We envision the software library to be broken down into three modules: the server, the data log, and the data queue. The server handles all the communication to achieve data consensus and interfaces with the data log and data queues. Further discussion regarding the "data log" can be found in Section \ref{sub:changes_made}. The data log is the data storage unit where each node stores data shared by the consensus leader. The data queue is a buffer where the client adds data to be sent to the leader.
 
 \begin{figure}[H]
     \centering
@@ -199,7 +199,7 @@ We updated a few components on the PCB due to better availability and documentat
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.55\textwidth]{images/pcb.png}
+    \includegraphics[width=0.45\textwidth]{images/pcb.png}
     \caption{Designed PCB}
     \label{fig:pcb}
 \end{figure}

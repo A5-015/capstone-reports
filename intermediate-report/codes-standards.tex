@@ -1,0 +1,7 @@
+\section{Codes and Standards}
+
+This project relies on two communication standards: the IEEE 802.11 wireless standard for inter-node communication and the I2C protocol for communication between integrated chips on the demonstration PCB.
+
+ Specifically, the ESP8266 chip supports the IEEE 802.11B/G/N protocols \cite{espressif:esp8266}. The mesh networking library used in this project, painlessMesh, only supports IEEE 802.11B and IEEE 802.11G, with the latter being the default protocol \cite{painlessMesh:wifi_standard}. Using the IEEE 802.11G protocol on the ESP8266 requires a transmit power of approximately $\SI{17}{dBm}$ and communication occurs within the $\SI{2.4 - 2.5}{GHz}$ frequency range \cite{espressif:esp8266}. Section \ref{section:networking_protocols} further discusses the IEEE 802.11 protocol in comparison to other available communication protocols.
+
+The demonstration PCB uses the I2C protocol for communication between the microprocessor, the sensors, and the display modules. The I2C protocol, developed by Philips Semiconductors, transmits data over a single SDA line and clocks the device communication over the SCL line. A single I2C bus can theoretically communicate with up to 127 secondary devices, although this number changes in practice based on the data rate and communication distance \cite{i2c_overview}. The I2C protocol satisfies the integrated chip communication requirements for the demonstration PCB.

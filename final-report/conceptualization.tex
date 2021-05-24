@@ -1,0 +1,272 @@
+\section{Conceptualization}
+\subsection{Concept Generation}
+
+Following the black box model in Figure \ref{fig:black_box}, we generated the concepts in the morphological chart shown in Table \ref{tab:morph_chart}.
+
+\begin{itemize}
+	\item \textbf{Networking Protocol} - While we will design our system to be modular and potentially connect with any networking protocol, we must select a protocol upon which to prototype. Through a literature search, we were able to find the most commonly used networking protocols available for Internet of Things (IoT) solutions.
+	\item \textbf{Networking Topology} - There are multiple topologies available to network devices. The hub-spoke topology and mesh topology are the most relevant to wireless devices.
+	\item \textbf{Consensus Algorithm} - Central to our project, we have a variety of consensus algorithms to select from. We narrow our scope to look specifically at distributed consensus algorithms. 
+	\item \textbf{Microcontroller} - IoT devices come in multiple different capabilities. While some are quite powerful and packed with significant resources, others are very simple systems meant for trivial tasks. The choice of IoT devices is important for performance, power consumption, and memory considerations.
+	\item \textbf{Networking Library} - Networking libraries provide an API to abstract away the lower-level networking implementation. Hence, the selected library must be easy to use and allow for flexibility in implementation. 
+	%\item \textbf{Battery} - For our prototype, we want to have access to mobile nodes and will thus develop our own prototype board powered by batteries so that it is not tethered to a power source.
+\end{itemize}
+
+
+\begin{table}[H]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Morphological chart}
+    \label{tab:morph_chart}
+    
+    \begin{center}
+        \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+        \multicolumn{6}{|c|}{\multirow{2}{*}{\textbf{ramen: Design and Development of a Raft Consensus Algorithm Coupled With a IEEE 802.11 Based Mesh Network for Embedded Systems}}} \\
+        \multicolumn{6}{|c|}{}                                                                                   \\ \hline
+        \multicolumn{1}{|c|}{Sub-Problem} & \multicolumn{5}{c|}{Available Options}                               \\        
+        \thickhline
+        Networking Protocol &
+          IEEE 802.11 &
+          IEEE 802.15.4 (Zigbee) &
+          IEEE 802.15.3 (UWB) &
+          802.15.1 (Bluetooth) &
+          LoRaWAN \\ \hline
+        Networking Topology     & Hub-Spoke Topology & Mesh Topology & Ring Topology & Bus Topology      &  \\ \hline
+        Consensus Algorithm     & Paxos              & Raft          & ZAB           & Mencius           &  \\ \hline
+        Microcontroller         & BCM2711            & ARM Cortex-A8 & ESP8266       & ATmega328P        &  \\ \hline
+        Networking Library      & easyMesh           & painlessMesh  & ESP-MESH       & ESP8266 WiFi Mesh &  \\ \hline
+        \end{tabular}
+\end{center}
+\end{table}
+\FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Concept Selection}
+
+We also constructed Pugh Charts to aid in the decision-making process when evaluating alternatives compared to a baseline. Pugh Charts compare a given option to potential alternatives and compare them across various criteria. If an alternative performs better than the given option on a certain criterion, then it scores a +1. If it performs worse for the criterion, then it scores a -1; otherwise, it is assumed to perform similarly and gets a score of 0. Finally, the score across all criteria is summed to determine whether an alternative is better than the original option being considered.
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for consensus algorithm selection with Raft as base}
+    \label{tab:pugh_raft}
+
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Consensus Algorithm} & Ease of Access & Documentation & Relevance & Performance & Sum \\
+        \thickhline
+        Raft    & Base & Base & Base & Base &    \\ \hline
+        Paxos   & -1   & 0    & -1   & 0    & -2 \\ \hline
+        Mencius & -1   & -1   & -1   & 0    & -3 \\ \hline
+        ZAB     & -1   & -1   & -1   & -1   & -4 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for consensus algorithm selection with Paxos as base}
+    \label{tab:pugh_paxos}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Consensus Algorithm} & Ease of Access & Documentation & Relevance & Performance & Sum \\ 
+        \thickhline
+        Raft    & 1    & 1    & 0    & 0    & 2  \\ \hline
+        Paxos   & Base & Base & Base & Base &    \\ \hline
+        Mencius & 0    & -1   & -1   & 0    & -2 \\ \hline
+        ZAB     & 0    & -1   & -1   & -1   & -3 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for consensus algorithm selection with Mencius as base}
+    \label{tab:pugh_mencius}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Consensus Algorithm} & Ease of Access & Documentation & Relevance & Performance & Sum \\ 
+        \thickhline
+        Raft    & 1    & 1    & 1    & 0    & 3  \\ \hline
+        Paxos   & 1    & 1    & 0    & 0    & 2  \\ \hline
+        Mencius & Base & Base & Base & Base &    \\ \hline
+        ZAB     & 0    & 0    & 0    & -1   & -1 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for consensus algorithm selection with ZAB as base}
+    \label{tab:pugh_zab}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{6}{|p{0.14\textwidth}|@{}}}
+        \hline
+        \multicolumn{1}{|c|}{Consensus Algorithm} & Ease of Access & Documentation & Relevance & Performance & Sum \\ 
+        \thickhline
+        Raft    & 1    & 1    & 1    & 1    & 4 \\ \hline
+        Paxos   & 1    & 1    & 1    & 0    & 3 \\ \hline
+        Mencius & 0    & 0    & 0    & 1    & 1 \\ \hline
+        ZAB     & Base & Base & Base & Base &   \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+After four iterations of the decision matrix, it is clear that the Raft consensus algorithm is the superior choice. Given its ease of access, better documentation, and equivalent performance, it will make development relatively easier.
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for microcontroller selection with BCM2711 as base}
+    \label{tab:pugh_zab_BCM2711}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{7}{|p{0.11\textwidth}|@{}}}
+        \hline
+        Microcontroller &
+        \multicolumn{1}{c|}{Ease of Access} &
+        \multicolumn{1}{c|}{Documentation} &
+        \multicolumn{1}{c|}{Resource Reasonability} &
+        \multicolumn{1}{c|}{Familiarity} &
+        \multicolumn{1}{c|}{Mesh Support} &
+        \multicolumn{1}{c|}{Sum} \\
+        \thickhline
+        BCM2711        & Base & Base & Base & Base & Base &    \\ \hline
+        ARM Cortex-A8  & -1   & 0    & 0    & -1   & 0    & -2 \\ \hline
+        ESP8266        & 0    & 0    & 1    & 0    & 0    & 1  \\ \hline
+        ATmega328P     & 0    & 0    & -1   & 0    & -1   & -2 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for microcontroller selection with ARM Cortex-A8 as base}
+    \label{tab:pugh_ARM_Cortex-A8}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{7}{|p{0.11\textwidth}|@{}}}
+        \hline
+        Microcontroller &
+        \multicolumn{1}{c|}{Ease of Access} &
+        \multicolumn{1}{c|}{Documentation} &
+        \multicolumn{1}{c|}{Resource Reasonability} &
+        \multicolumn{1}{c|}{Familiarity} &
+        \multicolumn{1}{c|}{Mesh Support} &
+        \multicolumn{1}{c|}{Sum} \\
+        \thickhline
+        BCM2711        & 1    & 0    & 0    & 1    & 0    & 2 \\ \hline
+        ARM Cortex-A8  & Base & Base & Base & Base & Base &   \\ \hline
+        ESP8266        & 1    & 0    & 1    & 1    & 0    & 3 \\ \hline
+        ATmega328P     & 1    & 0    & 0    & 1    & -1   & 1 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for microcontroller selection with ESP8266 as base}
+    \label{tab:pugh_ESP8266}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{7}{|p{0.11\textwidth}|@{}}}
+        \hline
+        Microcontroller &
+        \multicolumn{1}{c|}{Ease of Access} &
+        \multicolumn{1}{c|}{Documentation} &
+        \multicolumn{1}{c|}{Resource Reasonability} &
+        \multicolumn{1}{c|}{Familiarity} &
+        \multicolumn{1}{c|}{Mesh Support} &
+        \multicolumn{1}{c|}{Sum} \\ 
+        \thickhline
+        BCM2711        & 0    & 0    & -1   & 0    & 0    & -1 \\ \hline
+        ARM Cortex-A8  & -1   & 0    & -1   & -1   & 0    & -3 \\ \hline
+        ESP8266        & Base & Base & Base & Base & Base &    \\ \hline
+        ATmega328P     & 0    & 0    & -1   & 0    & -1   & -2 \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!h]
+    \scriptsize
+    
+    % Set row height
+    \renewcommand{\arraystretch}{1.3}
+    \vspace{10pt}
+    
+    \caption{Pugh chart for microcontroller selection with ATmega328P as base}
+    \label{tab:pugh_ATmega328P}
+    
+    \begin{center}
+        \begin{tabular}{@{}*{7}{|p{0.11\textwidth}|@{}}}
+        \hline
+        Microcontroller &
+        \multicolumn{1}{c|}{Ease of Access} &
+        \multicolumn{1}{c|}{Documentation} &
+        \multicolumn{1}{c|}{Resource Reasonability} &
+        \multicolumn{1}{c|}{Familiarity} &
+        \multicolumn{1}{c|}{Mesh Support} &
+        \multicolumn{1}{c|}{Sum} \\ 
+        \thickhline
+        BCM2711        & 0    & 0    & 0    & 0    & 1    & 1  \\ \hline
+        ARM Cortex-A8  & -1   & 0    & 0    & -1   & 1    & -1 \\ \hline
+        ESP8266        & 0    & 0    & 1    & 0    & 1    & 2  \\ \hline
+        ATmega328P     & Base & Base & Base & Base & Base &    \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+\FloatBarrier
+
+Having completed four iterations of the decision matrix for microcontroller selection, we are confident in our choice of the ESP8266, primarily due to its mid-tier on-board resources, which allow it to be more versatile in its applications. \textit{The remaining Pugh Charts can be found in Appendix \ref{sec:pugh-chart-appendix}}.

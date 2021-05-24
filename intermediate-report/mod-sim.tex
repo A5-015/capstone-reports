@@ -1,10 +1,10 @@
-\section{Modeling, Simulation, and Experimental Optimization Plan}
+\section{Modeling, Simulation, and Experimental Optimization}
 
 In order to create an experimental optimization plan for the project, first, the hardware and software constraints of the problem were identified. Since a different set of constraints can be applied based on the use-case, different models for each set of constraints were created. Finally, simulations were run on the generated models in order to analyze and understand what parts of the project to optimize through experimentation. The details of the code written for modeling and simulation can be found in Appendix \ref{sec:appendix-for-code}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{final-proposal/images/mod_sim_flowchart.png}
+    \includegraphics[width=0.95\textwidth]{images/mod_sim_flowchart.png}
     \caption{The high level flowchart capturing the modeling, simulation, and optimization process}
     \label{fig:mod-sim-flowchart}
 % graph LR
@@ -45,7 +45,7 @@ First, a two-dimensional rectangular virtual space was created based on the phys
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\columnwidth]{final-proposal/images/modeling_nodes_only.png}
+    \includegraphics[width=0.35\columnwidth]{images/modeling_nodes_only.png}
     \caption{Nodes randomly distributed in the virtual space}
     \label{fig:modeling_node}
 \end{figure}
@@ -55,7 +55,7 @@ Once the placement was completed in Figure \ref{fig:modeling_node}, the communic
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\columnwidth]{final-proposal/images/modeling_mesh.png}
+    \includegraphics[width=0.75\columnwidth]{images/modeling_mesh.png}
     \caption{Left: Nodes and their communication ranges, Right: Nodes connected in mesh network topology based on the communication ranges}
     \label{fig:modeling_mesh}
 \end{figure}
@@ -64,7 +64,7 @@ A hub-spoke network was also created from the random node placement shown in Fig
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\columnwidth]{final-proposal/images/modeling_star.png}
+    \includegraphics[width=0.75\columnwidth]{images/modeling_star.png}
     \caption{Left: Grouped nodes and corresponding hubs, Right: Nodes connected in hub-spoke (star) network topology based on the communication ranges}
     \label{fig:modeling_star}
 \end{figure}
@@ -72,7 +72,7 @@ A hub-spoke network was also created from the random node placement shown in Fig
 Figure \ref{fig:modeling_complex} demonstrates that the node placement process can be repeated with a greater number of nodes, different communication ranges \& budgets to create more complex hub-spoke and mesh networks
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.94\columnwidth]{final-proposal/images/modeling_complex_unified.png}
+    \includegraphics[width=0.75\columnwidth]{images/modeling_complex_unified.png}
     \caption{Left: Hub-spoke (star) network topology created in the virtual space, Right: Mesh network topology created in the virtual space}
     \label{fig:modeling_complex}
 \end{figure}
@@ -97,27 +97,30 @@ A limitation in modeling and simulation workflow is the lack of traveling nodes,
 
 Coracle accepts a JavaScript Object Notation (JSON) file with a specific structure as an input. We expect to write a \cc{simulation\_configuration} script to process the generated network models described in Section \ref{model-gen-section} and generate a JSON file for Coracle. Finally, we expect to write \cc{run\_coracle} script to feed the JSON file into Coracle, run multiple simulations, generate statistics, and display the results. 
 
-For our project, we will generate model networks with 20, 50, 100, 200, 500, and 1000 nodes in areas of 500$m^2$, 1000$m^2$, and 2000$m^2$, for both star and mesh topologies. For each combination, we will run 1000 simulations and gather and study the generated statistics.
+For our project, we generated model networks with 20, 50, 100, 200, 500, and 1000 nodes in areas of 500$m^2$, 1000$m^2$, and 2000$m^2$, for both star and mesh topologies. For each combination, we ran 100 simulations and gathered the generated statistics to inform our design.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{-5pt}
-\subsection{Experimental Plan}
+\subsection{Optimization Results}
 
-The experimental plan for our project is as follows:
+We followed the  experimental plan below to optimize our software library:
 \begin{enumerate}
-    \item Using NetworkX and SciKits software libraries, generate models for star and mesh network topologies in virtual spaces.
-    \item Run Coracle simulations on the network models, adjusting for different parameters such as range, maximum distance between nodes, maximum concurrent connections, virtual space, election timeouts, heartbeat intervals, and link failure rate.
-    \item Identify and decide upon a mesh communication development kit on ESP8266 chips that can be reasonably modified.
-    \item Identify an existing Raft implementation that is suitable for adaptation to operate on our choice of a mesh network. Otherwise, implement Raft ourselves based on previous work and literature.
-    \item Test our software library on existing ESP8266 development boards and iterate to obtain satisfactory results.
-    \item Run experiments using our software library to compare our real-world results to simulation results.
-    \item Design and manufacture a test-bed PCB to fully demonstrate the capabilities of our software library.
+    \item Using NetworkX and SciKits software libraries, we generated models for star and mesh network topologies in virtual spaces.
+    \item We ran Coracle simulations on the network models, adjusting for different parameters such as range, the maximum distance between nodes, maximum concurrent connections, virtual space, election timeouts, heartbeat intervals, and link failure rate.
+    \item We ran benchmarks using painlessMesh to obtain the limits of the mesh networking library we are building our software library atop of. 
+    \item Informed with the theoretical limitations of Raft and practical limitations of painlessMesh, we wrote our consensus on mesh software library.  
+    \item Throughout implementing our software library, we tested modules of the library on ESP8266 development boards and on a virtual network of nodes to obtain satisfactory results.
 \end{enumerate}
 
-The modeling and simulation will help inform the design choices made when implementing the software library. Our design choices of the real-world system will be guided by tweaking simulation parameters to obtain optimal simulation results.
+Furthermore, once we complete our software library, we plan to: 
+\begin{enumerate}
+    \item Run experiments using our software library to compare our real-world results to simulation results obtained from Coracle.
+    \item Informed with the shortcomings of our software library, we plan to return and optimize our software to better match the results from the Coracle simulations.
+\end{enumerate}
 
-We define the resilience of a network by three parameters: packet delivery rate, average communication latency, and time to leader election. In using the simulations, our efforts will focus on optimizing the system to maximize packet delivery and minimize latency and time to the election. As a result, we will gain an understanding of the range of environments in which our physical system will have effective use.
 
-We will aim to find the conditions under which packet delivery rate is at least 95\%, average latency is at most 20 ms, and time to leader selection is at most 1000ms.
+The modeling and simulations we performed guided us while making the design choices while implementing our software library. In the simulations, we defined the resilience of a network by three parameters: packet delivery rate, average communication latency, and time to leader election. In using the simulations, our efforts were focused on optimizing the system to maximize packet delivery and minimize latency and time to the election. As a result, we gained an understanding of the range of environments in which our physical system will have effective use.
+
+To sum up, we aimed to find the conditions under which packet delivery rate is at least 95\%, the average latency is at most 20 ms, and time to leader selection is at most 1000ms. These parameters were later used in our code.
